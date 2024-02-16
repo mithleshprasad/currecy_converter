@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Converter App</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Add your custom styles here */
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- File Converter Section -->
+        <div class="file-converter mt-5">
+            <h1>File Converter</h1>
+            <input type="file" id="fileInput" class="form-control mb-3">
+            <div class="btn-group mb-3">
+                <button id="convertToPdfBtn" class="btn btn-primary">Convert to PDF</button>
+                <button id="convertToImageBtn" class="btn btn-primary">Convert to Image</button>
+                <button id="convertFaviconToImageBtn" class="btn btn-primary">Favicon to Image</button>
+                <button id="convertImageToFaviconBtn" class="btn btn-primary">Image to Favicon</button>
+            </div>
+            <canvas id="imageCanvas" class="mb-3"></canvas>
+            <iframe id="pdfViewer" class="mb-3"></iframe>
+        </div>
+
+        <!-- Currency Converter Section -->
+        <div class="currency-converter mt-5">
+            <h1>Currency Converter</h1>
+            <div class="form-group">
+                <label for="amount">Amount:</label>
+                <input type="number" id="amount" class="form-control" placeholder="Enter amount">
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="fromCurrency">From Currency:</label>
+                    <select id="fromCurrency" class="form-control">
+                        <option value="USD">USD</option>
+                        <option value="EUR">EUR</option>
+                        <option value="INR">INR</option>
+                        <!-- Add more currencies as needed -->
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="toCurrency">To Currency:</label>
+                    <select id="toCurrency" class="form-control">
+                        <option value="USD">USD</option>
+                        <option value="EUR">EUR</option>
+                        <option value="INR">INR</option>
+                        <!-- Add more currencies as needed -->
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Converted Amount:</label>
+                <p id="convertedAmount" class="form-control">0</p>
+            </div>
+            <button id="convertCurrencyBtn" class="btn btn-primary">Convert</button>
+        </div>
+
+    </div>
+
+    <!-- Bootstrap JS and jQuery (required for Bootstrap) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // File Converter Functions
+        document.getElementById('convertToPdfBtn').addEventListener('click', function () {
+            convertFile('pdf');
+        });
+
+        document.getElementById('convertToImageBtn').addEventListener('click', function () {
+            convertFile('image');
+        });
+
+        document.getElementById('convertFaviconToImageBtn').addEventListener('click', function () {
+            convertFile('favicon');
+        });
+
+        document.getElementById('convertImageToFaviconBtn').addEventListener('click', function () {
+            convertFile('imageToFavicon');
+        });
+
+        function convertFile(type) {
+            // Implement your file conversion logic here
+            // This function will handle the file conversion based on the selected type
+        }
+
+        // Currency Converter Functions
+        document.getElementById('convertCurrencyBtn').addEventListener('click', convertCurrency);
+
+        function convertCurrency() {
+            var amount = parseFloat(document.getElementById('amount').value);
+            var fromCurrency = document.getElementById('fromCurrency').value;
+            var toCurrency = document.getElementById('toCurrency').value;
+
+            fetch('https://api.exchangerate-api.com/v4/latest/' + fromCurrency)
+                .then(response => response.json())
+                .then(data => {
+                    var exchangeRate = data.rates[toCurrency];
+                    var convertedAmount = amount * exchangeRate;
+                    document.getElementById('convertedAmount').textContent = convertedAmount.toFixed(2);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+    </script>
+
+</body>
+
+</html>
