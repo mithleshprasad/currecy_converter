@@ -4,34 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Converter App</title>
+    <title>Currency Converter</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* Add your custom styles here */
+        .body {
+            background:
+                linear-gradient(to right, #ff5733, #ff8c33),
+                /* Left side gradient */
+                linear-gradient(to left, #33ff57, #33ffd5),
+                /* Right side gradient */
+                #6d89a5;
+            /* Middle color */
+            background-blend-mode: normal, normal, normal;
+            /* Set blend mode */
+            background-size: 50%, 50%, 100% 100%;
+            /* Set background size */
+            background-position: left, right, center;
+            /* Set background position */
+        }
     </style>
 </head>
 
 <body>
 
-    <div class="container">
+    <div class="container mt-5">
 
-        <!-- File Converter Section -->
-        <div class="file-converter mt-5">
-            <h1>File Converter</h1>
-            <input type="file" id="fileInput" class="form-control mb-3">
-            <div class="btn-group mb-3">
-                <button id="convertToPdfBtn" class="btn btn-primary">Convert to PDF</button>
-                <button id="convertToImageBtn" class="btn btn-primary">Convert to Image</button>
-                <button id="convertFaviconToImageBtn" class="btn btn-primary">Favicon to Image</button>
-                <button id="convertImageToFaviconBtn" class="btn btn-primary">Image to Favicon</button>
-            </div>
-            <canvas id="imageCanvas" class="mb-3"></canvas>
-            <iframe id="pdfViewer" class="mb-3"></iframe>
-        </div>
-
-        <!-- Currency Converter Section -->
-        <div class="currency-converter mt-5">
+        <div class="currency-converter">
             <h1>Currency Converter</h1>
             <div class="form-group">
                 <label for="amount">Amount:</label>
@@ -72,28 +71,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script>
-        // File Converter Functions
-        document.getElementById('convertToPdfBtn').addEventListener('click', function () {
-            convertFile('pdf');
-        });
-
-        document.getElementById('convertToImageBtn').addEventListener('click', function () {
-            convertFile('image');
-        });
-
-        document.getElementById('convertFaviconToImageBtn').addEventListener('click', function () {
-            convertFile('favicon');
-        });
-
-        document.getElementById('convertImageToFaviconBtn').addEventListener('click', function () {
-            convertFile('imageToFavicon');
-        });
-
-        function convertFile(type) {
-            // Implement your file conversion logic here
-            // This function will handle the file conversion based on the selected type
-        }
-
         // Currency Converter Functions
         document.getElementById('convertCurrencyBtn').addEventListener('click', convertCurrency);
 
